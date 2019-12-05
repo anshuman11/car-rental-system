@@ -1,7 +1,7 @@
 // MODULES REQUIRED FOR PROJECT
 const express       = require('express');
-const mongoose      = require('mongoose');
 const app           = express();
+const mongoose      = require('mongoose');
 const session       = require('express-session');
 const bodyParser    = require('body-parser');
 const passport      = require('passport');
@@ -315,11 +315,7 @@ app.post('/admin/addCar', function (req, res) {
                 errorResponse = err.errors.currentAvailable.properties;
             res.json(errorResponse);
         } else
-            res.json({
-                "status": "ok",
-                "car_id": car._id,
-                "result": "Car added into database!"
-            });
+            res.redirect('/viewCars');
     });
 
 });
@@ -345,10 +341,7 @@ app.post('/admin/deleteCar', async function (req, res) {
             })
             .exec()
             .then(() => {
-                res.json({
-                    "status": "ok",
-                    "result": "Car is successfully deleted from database!"
-                });
+                res.redirect('/viewCars');
             })
             .catch((err) => {
                 res.json({
@@ -381,10 +374,7 @@ app.post('/admin/update', async function (req, res) {
             }, req.body)
             .exec()
             .then(() => {
-                res.json({
-                    "status": "ok",
-                    "result": "Car updated with provided properties!"
-                });
+                res.redirect('/viewCars');
             })
             .catch((err) => {
                 res.send("Some error occurred!..Car is not updated");
