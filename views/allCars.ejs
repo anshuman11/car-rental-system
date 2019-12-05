@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Cars</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" rel="stylesheet" type="text/css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <style type=text/css >
+            #top{
+                margin-left: 100px;
+            }
+            .sidebar{
+                    height: 100%;
+                    width: 200px;
+                    position:fixed;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    background-color: rgba(0, 10, 6, 0.993);
+                    color:azure;
+                    overflow-x: hidden;
+                    padding-top: 20px;
+            }
+            .navbar{
+                    margin-left: 200px;
+                    box-shadow: 5px 4px 6px rgba(0,0,0,0.1);
+            }
+            .head{
+                    font-family: 'Merriweather', serif;
+                    font-size: 35px;
+            }
+            .main1{
+                    align-self: center;
+                    align-items: center;
+                    background-color: none;
+                    width: 80%;
+                    margin: 0 auto;
+                    margin-left: 200px;
+                    text-align: center;
+                    font-family: 'Merriweather', serif;
+                }
+            .main2{
+                    align-self: center;
+                    align-items: center;
+                    background-color: none;
+                    width: 100%;
+                    margin: 0 auto;
+                    text-align: center;
+                    font-family: 'Merriweather', serif;
+                }
+            /* .btn:hover{
+                    transform: translate(0, -5px);
+                    background-color: rgb(7, 119, 67);
+                    color: wheat;
+                } */
+            /* .mainbtn:hover{
+                    transform: translate(0, -10px);
+                    background-color: #00808C;
+                    color: white;
+                } */
+            .card{
+                    transition: transform .3s ease-out;
+                    display: inline-block;
+                    border: 0px;
+                    text-align: left;
+                    font-family: 'Merriweather', serif;
+                }
+            .card:hover{
+                    transform: translate(-5px, -10px);
+                    box-shadow: 18px 18px 18px rgba(5, 5, 5, 0.4);
+                }
+            .btn:hover{
+                transform: translate(-2px, -3px);
+                box-shadow: 8px 8px 8px rgba(5, 5, 5, 0.4);
+            }
+            .content{
+                    width:85%;
+                    height: 10%;
+                    text-align: left;
+                    padding-top: 25px;
+                    margin-top: 25px;
+                    background-color: none;
+                }
+            .footer{
+                    width: 100%;
+                    height: 30%;
+                    text-align: center;
+                    color: rgba(0,0,0,0.6);
+                    font-size: 18px;
+                    padding: 16px;
+                }
+            @media screen and (max-width: 720px) {
+            .sidebar {
+                    width: 0%;
+                }
+            .navbar{
+                    margin:0 auto;
+                }
+            .main1{
+                    margin:0 auto;
+                }
+            #top{
+                    margin: 0 auto;
+                }
+            .content{
+                    padding: 0 auto;
+                }
+            .container{
+                    margin: 0 auto;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="container">
+                    <div>
+                        <button style="color: rgba(0, 10, 6, 0.993);">FILTERS</button>
+                    </div>
+                    <br><br>
+                    <form action="/viewCars" method="POST">
+                        <div class="form-group">
+                        <label>Rent Per Day :</label>
+                        <input type="Number" class="form-control" name="rentPerDay" placeholder="search">
+                        </div>
+                        <div class="form-group">
+                        <label>Seat Capacity :</label>
+                        <input type="Number" class="form-control" name="seatCapacity" placeholder="search">
+                        </div>
+                        <div class="form-group">
+                        <label>Car Model :</label>
+                        <input type="String" class="form-control" name="model" placeholder="search">
+                        </div><br>
+                        <button type="submit" class="btn btn-warning">Apply</button>
+                    </form>
+            </div>
+        </div>
+        <!-- NAVBAR -->
+        <nav  class="navbar navbar-light bg-light">
+                <span id="top" class="navbar-brand mb-0 h1">OUR <b>CARS</b></span>
+        </nav>
+        <div class="main1">
+            <div class="container-fluid main2">
+                <div class="row">
+                    <% for(var i = 0; i < allFilteredCars.length; i++) {  %>
+                        <div class="col-xs-12 col-sm-6  col-md-4 col-lg-3">
+                                <div class="card" style="width: 100%">
+                                    <div class="card" style="width: 100%">
+                                        <img style="height: 200px;" class="card-img-top" alt="Card image cap" src= <%= allFilteredCars[i].carImage %> >
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"> <b>Car Number</b>  : <%= allFilteredCars[i].carNumber %></li>
+                                    <li class="list-group-item"> <b>Model</b> : <%= allFilteredCars[i].model %></li>
+                                    <li class="list-group-item"> <b>Current Available</b>   : <%= allFilteredCars[i].currentAvailable %></li>
+                                    <li class="list-group-item"> <b>Rent Per Day</b> : <%= allFilteredCars[i].rentPerDay %></li>
+                                    <li class="list-group-item"> <b>Seat Capacity</b>   : <%= allFilteredCars[i].seatCapacity %></li>
+                                    <form action="/bookCar" method="POST">
+                                        <input type="text" name="carId" style="display: none;" value= <%=allFilteredCars[i].carId %> >
+                                        <button type="submit" class="btn btn-primary">Book Car</button>
+                                    </form>
+                                    </li>
+                                    <ul>
+                                </div>
+                        </div>
+                    <% }
+                    %>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
